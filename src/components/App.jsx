@@ -9,10 +9,9 @@ export default function App() {
         users.filter((user) => user.unread).length
     );
 
-    useEffect(
-        () => setCount(users.filter((user) => user.unread).length),
-        [users]
-    );
+    useEffect(() => {
+        setCount(users.filter((user) => user.unread).length);
+    }, [users]);
 
     function toggleAllNotificationReads() {
         setUsers(

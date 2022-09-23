@@ -16,7 +16,9 @@ export default function Notification(props) {
 
     return (
         <section
-            className={`section-notification ${unread ? "unread" : "read"}`}
+            className={`section-notification ${
+                unread ? "notification-unread" : "notification-read"
+            }`}
             onClick={() => props.toggleSingleNotificationRead(props.id)}
         >
             <div className="outer-div">
@@ -30,7 +32,13 @@ export default function Notification(props) {
                         ) : (
                             <span className="group">{group}</span>
                         )}{" "}
-                        {unread && <span className="dot">•</span>}
+                        <span
+                            className={`dot ${
+                                unread ? "dot-unread" : "dot-read"
+                            }`}
+                        >
+                            •
+                        </span>
                     </p>
                     <time>{duration}</time>
                     {message && <p className="message">{message}</p>}

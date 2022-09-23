@@ -5,13 +5,15 @@
     padding: 17px;
     border-radius: 10px;
     cursor: pointer;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
 }
 
-.read {
+.notification-read {
     background-color: #fff;
 }
 
-.unread {
+.notification-unread {
     background-color: #f7fafd;
 }
 
@@ -53,9 +55,18 @@
 }
 
 .section-notification .dot {
-    color: #f65351;
     font-size: 30px;
     line-height: 0.1;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+}
+
+.dot-read {
+    color: #fff;
+}
+
+.dot-unread {
+    color: #f65351;
 }
 
 .section-notification time {

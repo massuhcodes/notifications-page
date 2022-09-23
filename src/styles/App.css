@@ -11,10 +11,9 @@ header {
     background-color: #fff;
     padding: 17px 20px;
     box-shadow: 1px 1px 30px rgba(211, 211, 211, 0.5);
+    border-bottom: 1px solid #f7fafd;
     position: sticky;
     top: 0;
-    z-index: 1;
-    border-bottom: 1px solid #f7fafd;
 }
 
 header h2 {
@@ -40,6 +39,11 @@ header .count {
     padding: 3px 13px;
     border-radius: 5px;
     display: block;
+    /* -webkit-animation: countUpdate 1s; */
+}
+
+.update {
+    animation: countUpdate 1s;
 }
 
 header .toggler-of-all-notifications {
@@ -48,6 +52,11 @@ header .toggler-of-all-notifications {
     color: #5e6778;
     margin-left: 20px;
     text-align: right;
+}
+
+.main-container {
+    background-color: teal;
+    overflow-y: hidden;
 }
 
 main {
@@ -59,16 +68,13 @@ main {
     padding-bottom: 20px;
 }
 
-::-webkit-scrollbar {
-    scroll-margin-top: 66px;
-}
-
 @media (min-width: 701px) {
     body {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
+        background-color: #f7fafd;
     }
 
     .app {
@@ -76,7 +82,21 @@ main {
         max-height: 90vh;
         height: auto;
         margin: 0 auto;
-        overflow: auto;
         box-shadow: 2px 3px 30px 0px #c1c1c13e, -2px 3px 30px 0px #c1c1c13e;
+        overflow-y: auto;
+    }
+}
+
+@keyframes countUpdate {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
     }
 }
