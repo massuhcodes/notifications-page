@@ -17,6 +17,8 @@ const events = {
     6: "left the group",
 };
 
+const truth = [true, false];
+
 export const data = [
     {
         id: nanoid(),
@@ -28,7 +30,7 @@ export const data = [
         group: "",
         message: "",
         picture: "",
-        unread: true,
+        unread: truth[Math.floor(Math.random() * truth.length)],
         duration: "1m ago",
     },
     {
@@ -41,7 +43,7 @@ export const data = [
         group: "",
         message: "",
         picture: "",
-        unread: true,
+        unread: truth[Math.floor(Math.random() * truth.length)],
         duration: "5m ago",
     },
     {
@@ -54,7 +56,7 @@ export const data = [
         group: "Chess Club",
         message: "",
         picture: "",
-        unread: true,
+        unread: truth[Math.floor(Math.random() * truth.length)],
         duration: "1 day ago",
     },
     {
@@ -68,7 +70,7 @@ export const data = [
         message:
             "Hello, thanks for setting up the Chess Club. I've been a memeber for a few weeks now and I'm already having lots of fun and improving my game.",
         picture: "",
-        unread: false,
+        unread: truth[Math.floor(Math.random() * truth.length)],
         duration: "5 days ago",
     },
     {
@@ -81,7 +83,7 @@ export const data = [
         group: "",
         message: "",
         picture: chess,
-        unread: false,
+        unread: truth[Math.floor(Math.random() * truth.length)],
         duration: "1 week ago",
     },
     {
@@ -94,7 +96,7 @@ export const data = [
         group: "",
         message: "",
         picture: "",
-        unread: false,
+        unread: truth[Math.floor(Math.random() * truth.length)],
         duration: "2 weeks ago",
     },
     {
@@ -107,7 +109,7 @@ export const data = [
         group: "Chess Club",
         message: "",
         picture: "",
-        unread: false,
+        unread: truth[Math.floor(Math.random() * truth.length)],
         duration: "2 weeks ago",
     },
 ];
