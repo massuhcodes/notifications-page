@@ -13,7 +13,7 @@ const times = (count) => {
         times.push(Math.ceil(Math.random() * maxMins));
     }
     // sorted in ascending order
-    return times.sort(a - b);
+    return times.sort((a, b) => a - b);
 };
 
 export { times };
