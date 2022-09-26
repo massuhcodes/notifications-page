@@ -34,7 +34,8 @@ async function getPropertyData(property, count = 1) {
     // reduce code smell
     switch (property) {
         case "messages":
-            url = `${domainV1}/riddles?limit=${count}`;
+            // double the count just to get variety
+            url = `${domainV1}/riddles?limit=${count * 2}`;
             errorMessage = "Something went wrong when getting messages";
             backupData = backupMessage;
             break;
