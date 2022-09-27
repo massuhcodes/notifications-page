@@ -15,43 +15,36 @@ const backupUsers = [
         avatar: angelaGray,
         first_name: "Angela",
         last_name: "Gray",
-        alt: "A picture of Angela Gray",
     },
     {
         avatar: annaKim,
         first_name: "Anna",
         last_name: "Kim",
-        alt: "A picture of Anna Kim",
     },
     {
         avatar: jacobThompson,
         first_name: "Jacob",
         last_name: "Thompson",
-        alt: "A picture of Jacob Thompson",
     },
     {
         avatar: kimberlySmith,
         first_name: "Kimberly",
         last_name: "Smith",
-        alt: "A picture of Kimberly Smith",
     },
     {
         avatar: markWebber,
         first_name: "Mark",
         last_name: "Webber",
-        alt: "A picture of Mark Webber",
     },
     {
         avatar: nathanPeterson,
         first_name: "Nathan",
         last_name: "Peterson",
-        alt: "A picture of Nathan Peterson",
     },
     {
         avatar: rizkyHasanuddin,
         first_name: "Rizky",
         last_name: "Hasanuddin",
-        alt: "A picture of Rizky Hasanuddin",
     },
 ];
 

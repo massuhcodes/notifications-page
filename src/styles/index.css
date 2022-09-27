@@ -7,22 +7,23 @@
 
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
     cursor: pointer;
 }
 
 /* */
 *::-webkit-scrollbar-track {
     background: #fff;
-    border-radius: 10px;
-
-    margin-top: 71px;
+    border-radius: 0 0 10px 0px;
+    box-shadow: inset -1px 1px 3px 1px #e4e4e480;
+    margin-top: 70px;
     margin-right: 5px;
+    border-top: 1px solid #d7d7d784;
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: #64666a2e;
-    border-radius: 10px;
+    background-color: #d9e1e8;
+    border-radius: 0 0 10px 10px;
 }
 
 body {

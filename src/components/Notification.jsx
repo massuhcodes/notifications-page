@@ -11,7 +11,7 @@ export default function Notification(props) {
         message,
         picture,
         unread,
-        duration,
+        time,
     } = props.user;
 
     return (
@@ -22,7 +22,11 @@ export default function Notification(props) {
             onClick={() => props.toggleSingleNotificationRead(props.id)}
         >
             <div className="outer-div">
-                <img className="profile-picture" src={profilePicture} />
+                <img
+                    className="profile-picture"
+                    src={profilePicture}
+                    alt={`Profile Picture of ${name}`}
+                />
                 <div className="inner-div">
                     <p>
                         <span className="name">{name}</span>{" "}
@@ -31,20 +35,24 @@ export default function Notification(props) {
                             <span className="post">{post}</span>
                         ) : (
                             <span className="group">{group}</span>
-                        )}{" "}
-                        <span
-                            className={`dot ${
-                                unread ? "dot-unread" : "dot-read"
-                            }`}
-                        >
-                            •
-                        </span>
+                        )}
                     </p>
-                    <time>{duration}</time>
-                    {message && <p className="message">{message}</p>}
+                    <time>{`${time} ${time === 1 ? "min" : "mins"} ago`}</time>
+                    <span
+                        className={`dot ${unread ? "dot-unread" : "dot-read"}`}
+                    >
+                        •
+                    </span>
+                    {message && <p className={`message ${unread ? "message-unread" : "message-read"}`}>{message}</p>}
                 </div>
             </div>
-            {picture && <img className="notification-picture" src={picture} />}
+            {picture && (
+                <img
+                    className="notification-picture"
+                    src={picture}
+                    alt={`${name}'s commented picture`}
+                />
+            )}
         </section>
     );
 }

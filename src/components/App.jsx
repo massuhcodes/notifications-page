@@ -1,22 +1,25 @@
 import "/src/styles/App.css";
 import { useEffect, useState } from "react";
-import { data } from "../utils/data.js";
+import data from "/src/utils/notifications-data.js";
 import Notification from "./Notification.jsx";
 
+// notifications (plural); note (singular form of notifications)
+
 export default function App() {
-    const [users, setUsers] = useState(data);
+    // fix here
+    const [notifications, setNotifications] = useState(data);
     const [count, setCount] = useState(
-        users.filter((user) => user.unread).length
+        notifications.filter((note) => note.unread).length
     );
 
     useEffect(() => {
-        setCount(users.filter((user) => user.unread).length);
-    }, [users]);
+        setCount(notifications.filter((note) => note.unread).length);
+    }, [notifications]);
 
     function toggleAllNotificationReads() {
-        setUsers(
-            users.map((user) => ({
-                ...user,
+        setNotifications(
+            notifications.map((note) => ({
+                ...note,
                 // must toggle truth
                 unread: !(count > 0),
             }))
@@ -24,20 +27,20 @@ export default function App() {
     }
 
     function toggleSingleNotificationRead(id) {
-        setUsers(
-            users.map((user) => {
-                return user.id === id
-                    ? { ...user, unread: !user.unread }
-                    : user;
+        setNotifications(
+            notifications.map((note) => {
+                return note.id === id
+                    ? { ...note, unread: !note.unread }
+                    : note;
             })
         );
     }
 
-    const notifications = users.map((user) => (
+    const notificationComponents = notifications.map((note) => (
         <Notification
-            key={user.id}
-            id={user.id}
-            user={user}
+            key={note.id}
+            id={note.id}
+            user={note}
             toggleSingleNotificationRead={toggleSingleNotificationRead}
         />
     ));
@@ -55,7 +58,7 @@ export default function App() {
                     {count > 0 ? "Make all as read" : "Make all as unread"}
                 </span>
             </header>
-            <main>{notifications}</main>
+            <main>{notificationComponents}</main>
         </div>
     );
 }

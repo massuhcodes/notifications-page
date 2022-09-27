@@ -33,6 +33,10 @@
 
 .section-notification .profile-picture {
     width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
 }
 
 .section-notification .name {
@@ -55,7 +59,8 @@
 }
 
 .section-notification .dot {
-    font-size: 30px;
+    margin-left: 10px;
+    font-size: 20px;
     line-height: 0.1;
     -webkit-transition: 0.2s;
     transition: 0.2s;
@@ -83,5 +88,8 @@
 
 .section-notification .notification-picture {
     width: 45px;
+    height: 45px;
+    border-radius: 7px;
+    object-fit: cover;
     margin-left: 20px;
 }

@@ -10,7 +10,7 @@ header {
     justify-content: space-between;
     background-color: #fff;
     padding: 17px 20px;
-    box-shadow: 1px 1px 30px rgba(211, 211, 211, 0.5);
+    box-shadow: 1px 1px 10px rgba(211, 211, 211, 0.5);
     border-bottom: 1px solid #f7fafd;
     position: sticky;
     top: 0;
@@ -78,12 +78,17 @@ main {
     }
 
     .app {
+        border: 1px solid rgba(215, 215, 215, 0.516);
         border-radius: 10px;
         max-height: 90vh;
         height: auto;
         margin: 0 auto;
-        box-shadow: 2px 3px 30px 0px #c1c1c13e, -2px 3px 30px 0px #c1c1c13e;
+        box-shadow: 4px 1px 20px #a5a5a514, -4px 1px 20px #a5a5a514;
         overflow-y: auto;
+    }
+
+    header {
+        border-bottom: 1px solid rgba(215, 215, 215, 0.516);
     }
 }
 
