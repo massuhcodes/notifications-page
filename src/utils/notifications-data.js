@@ -10,7 +10,9 @@ import { times } from "/src/utils/times.js";
 import {
     getUsers,
     getPhoto,
-    getPropertyData,
+    getGroup,
+    getPost,
+    getMessage
 } from "/src/utils/api/api-data.js";
 
 /**
@@ -19,33 +21,19 @@ import {
  * @returns {Object} - An array of notification
  */
 async function notificationsData(count) {
-    // notification properties to be fetched
-    let [users, photo, group, post, messages] = [];
-    // fetch data for each property
+    let users;
+    // fetch the number of users based on count
     try {
-        const response = await Promise.allSettled([
-            getUsers(count),
-            getPhoto(),
-            getPropertyData("group"),
-            getPropertyData("post"),
-            getPropertyData("messages", count),
-        ]);
-        [users, photo, group, post, messages] = response.map(
-            (element) => element.value
-        );
+        users = await getUsers(count);
     } catch (error) {
-        console.log(`Something went wrong in Promise.all: ${error}`);
+        console.log(`Something went wrong when getting users: ${error}`);
     }
 
     // the array of notifications times based on number of notifications
     const notificationTimes = times(count);
-    // uppercase group name
-    group = group.hobby
-        .split(" ")
-        .map((word) => word[0].toUpperCase() + word.slice(1))
-        .join(" ");
 
-    return users.map((user, index) => {
+    // will receive an array of Promises that each need to be resolved
+    const notificationPromises = users.map(async (user, index) => {
         // events begins with 1 not 0 so must use ceil
         const type = Math.ceil(Math.random() * Object.keys(events).length);
         // notification can take a single event
@@ -69,28 +57,35 @@ async function notificationsData(count) {
 
         // based on event, populate the property with fetched data
         switch (event) {
-            case events[1]:
-                notification.post = `${post[0].fact}.`;
+            case events[1]: // a post will always be an anime quote (hopefully a One Piece quote)
+                const response = await getPost();
+                notification.post = `"${response.quote}" –– ${response.character}, [${response.anime}]`;
                 break;
-            case events[2]:
-                break;
-            case events[3]:
-                notification.group = group;
+            case events[2]: // this just means someone followed, so just skip
                 break;
             case events[4]:
-                const index = Math.floor(Math.random() * messages.length);
-                // choose from an array of messages
-                notification.message = messages[index].question;
+                notification.message = await getMessage();
                 break;
-            case events[5]:
-                // returns an array with a single element
-                notification.picture = photo
+            case events[5]: // get a single photo
+                notification.picture = await getPhoto();
                 break;
+            case events[3]: // joined or left group, same logic applies
             case events[6]:
-                notification.group = group;
+                const group = await getGroup();
+                const upperCasedGroup = group
+                    .split(" ")
+                    .map((word) => word[0].toUpperCase() + word.slice(1))
+                    .join(" ");
+                notification.group = upperCasedGroup;
+                break;
+            default: // this should never happen
+                console.log("A wierd event just ocurred");
         }
+
         return notification;
     });
+
+    return Promise.all(notificationPromises);
 }
 
 // determine the number of notifications to display (min = 1, max = 7)

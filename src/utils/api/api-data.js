@@ -1,7 +1,5 @@
 // Fetch notification data
 
-import { ninjasKeys, pexelKey } from "/src/utils/api/api-keys.js";
-import { createClient } from "pexels";
 import {
     backupUsers,
     backupPhoto,
@@ -11,78 +9,82 @@ import {
 } from "/src/utils/backup-data.js";
 
 /**
- * Fetch data for either "messages", "post", or "group"
- * Data is fetched from "https://api-ninjas.com/"
- * If fetching fails, return backup data
- * @param {String} property - either a value with "messages", "post", or "group"
- * @param {Number} count - based on the number of notifications to show (default = 1)
- * @returns {Object} retrievedData - value is returned and further processed in notificationsData.js
+ * Fetch joke to be used as messages sent by users
+ * Message is fetched from https://sv443.net/jokeapi/v2/
+ * If fetching fails, return `backupMessage`
+ * @returns {String} - a value to be used as message
  */
-async function getPropertyData(property, count = 1) {
-    let retrievedData;
-    let backupData;
-    let url;
-    let errorMessage;
-    const domainV1 = "https://api.api-ninjas.com/v1";
-    const options = {
-        method: "GET",
-        headers: {
-            "Content-Type": "applications/json",
-            "X-API-Key": ninjasKeys,
-        },
-    };
-    // reduce code smell
-    switch (property) {
-        case "messages":
-            // double the count just to get variety
-            url = `${domainV1}/riddles?limit=${count * 2}`;
-            errorMessage = "Something went wrong when getting messages";
-            backupData = backupMessage;
-            break;
-        case "post":
-            url = `${domainV1}/facts?limit=${count}`;
-            errorMessage = "Something went wrong when getting post";
-            backupData = backupPost;
-            break;
-        case "group":
-            url = `${domainV1}/hobbies?category=general`;
-            errorMessage = "Something went wrong when getting group";
-            backupData = backupGroup;
-            break;
-    }
-    // fetch here
+async function getMessage() {
+    let response;
+    let message;
     try {
-        const response = await fetch(url, options);
-        retrievedData = await response.json();
+        // some jokes are pretty dark so lets keep it professional
+        response = await fetch(
+            "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single"
+        );
+        response = await response.json();
+        message = response.joke;
     } catch (error) {
-        console.log(`${errorMessage}: ${error}`);
-        // return backup data
-        retrievedData = backupData;
+        console.log(`Something went wrong when getting post: ${error}`);
+        message = backupMessage;
     }
-    return retrievedData;
+    return message;
+}
+
+/**
+ * Fetch anime quotes to be used as post
+ * These quotes are fetched from https://animechan.vercel.app/
+ * If fetching fails, return `backupPost`
+ * @returns {String} - a value to be used as post
+ */
+async function getPost() {
+    let response;
+    let post;
+    try {
+        response = await fetch(`https://animechan.vercel.app/api/random`);
+        post = await response.json();
+    } catch (error) {
+        console.log(`Something went wrong when getting messages: ${error}`);
+        post = backupPost;
+    }
+    return post;
+}
+
+/**
+ * Fetch sport name to be used as group
+ * Sport name is fetched from https://developers.decathlon.com/products/sports
+ * If fetching fails, return `backupGroup`
+ * @returns {String} - a value to be used as group
+ */
+async function getGroup() {
+    let response;
+    let group;
+    let data;
+    try {
+        response = await fetch("https://sports.api.decathlon.com/sports");
+        response = await response.json();
+        data = response.data;
+        group = data[Math.floor(Math.random() * data.length)].attributes.name;
+    } catch (error) {
+        console.log(`Something went wrong when getting group: ${error}`);
+        group = backupGroup;
+    }
+    return group;
 }
 
 /**
  * Fetch photo being commented on
- * Photo is fetched from "https://www.pexels.com/api/"
+ * Photo is fetched from https://picsum.photos/
  * If fetching fails, return `backupPhoto`
  * @returns {String} - "url of where the photo is located"
  */
 async function getPhoto() {
-    // required based on documentation
-    const client = createClient(pexelKey);
-    // select a random page
-    const randomPage = Math.ceil(Math.random() * 30);
+    let response;
     let photo;
     // fetch here
     try {
-        const response = await client.photos.curated({
-            page: randomPage,
-            // one image is needed
-            per_page: 1,
-        });
-        // get the single photo from the array
-        photo = await response.photos[0].src.small;
+        response = await fetch("https://picsum.photos/200");
+        photo = response.url;
     } catch (error) {
         console.log(`Something went wrong when getting photo: ${error}`);
         // return backup photo
@@ -118,4 +120,4 @@ async function getUsers(count = 1) {
     return users;
 }
 
-export { getUsers, getPhoto, getPropertyData };
+export { getUsers, getPhoto, getGroup, getPost, getMessage };
