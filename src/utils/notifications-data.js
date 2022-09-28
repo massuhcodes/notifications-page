@@ -22,15 +22,11 @@ import {
  */
 async function notificationsData(count) {
     let users;
-    // fetch the number of users based on count
-    try {
-        users = await getUsers(count);
-    } catch (error) {
-        console.log(`Something went wrong when getting users: ${error}`);
-    }
+    // fetch users based on count
+    users = await getUsers(count);
 
     // the array of notifications times based on number of notifications
-    const notificationTimes = times(count);
+    const notificationTimes = times(users.length);
 
     // will receive an array of Promises that each need to be resolved
     const notificationPromises = users.map(async (user, index) => {
@@ -85,16 +81,11 @@ async function notificationsData(count) {
         return notification;
     });
 
+    // resolves all Promise elements and returns an array of objects
     return Promise.all(notificationPromises);
 }
 
-let data;
-try {
-    data = await notificationsData(Math.ceil(Math.random() * 7));
-} catch (error) {
-    console.log(
-        `Something went wrong when getting notifactions data: ${error}`
-    );
-}
+// get the random number of notifications
+const data = await notificationsData(Math.ceil(Math.random() * 7));
 
 export default data;
