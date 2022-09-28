@@ -12,7 +12,7 @@ import {
     getPhoto,
     getGroup,
     getPost,
-    getMessage
+    getMessage,
 } from "/src/utils/api/api-data.js";
 
 /**
@@ -88,16 +88,6 @@ async function notificationsData(count) {
     return Promise.all(notificationPromises);
 }
 
-// determine the number of notifications to display (min = 1, max = 7)
-// used ceil because count should never be 0
 const count = Math.ceil(Math.random() * 7);
-let data;
-try {
-    data = await notificationsData(count);
-} catch (error) {
-    console.log(
-        `Something went wrong when getting the notifications data: ${error}`
-    );
-}
 
-export default data;
+export default notificationsData;

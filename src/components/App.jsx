@@ -1,13 +1,13 @@
 import "/src/styles/App.css";
 import { useEffect, useState } from "react";
-import data from "/src/utils/notifications-data.js";
+import notificationsData from "/src/utils/notifications-data.js";
 import Notification from "./Notification.jsx";
 
 // notifications (plural); note (singular form of notifications)
 
 export default function App() {
     // fix here
-    const [notifications, setNotifications] = useState(data);
+    const [notifications, setNotifications] = useState([]);
     const [count, setCount] = useState(
         notifications.filter((note) => note.unread).length
     );
