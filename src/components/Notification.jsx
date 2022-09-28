@@ -16,9 +16,11 @@ export default function Notification(props) {
 
     return (
         <section
+            // update background color based on truth
             className={`section-notification ${
                 unread ? "notification-unread" : "notification-read"
             }`}
+            // give back selected id
             onClick={() => props.toggleSingleNotificationRead(props.id)}
         >
             <div className="outer-div">
@@ -39,11 +41,21 @@ export default function Notification(props) {
                     </p>
                     <time>{`${time} ${time === 1 ? "min" : "mins"} ago`}</time>
                     <span
+                        // update based on truth
                         className={`dot ${unread ? "dot-unread" : "dot-read"}`}
                     >
                         •
                     </span>
-                    {message && <p className={`message ${unread ? "message-unread" : "message-read"}`}>{message}</p>}
+                    {message && (
+                        <p
+                            // update based on truth
+                            className={`message ${
+                                unread ? "message-unread" : "message-read"
+                            }`}
+                        >
+                            {message}
+                        </p>
+                    )}
                 </div>
             </div>
             {picture && (
