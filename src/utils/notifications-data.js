@@ -88,6 +88,13 @@ async function notificationsData(count) {
     return Promise.all(notificationPromises);
 }
 
-const count = Math.ceil(Math.random() * 7);
+let data;
+try {
+    data = await notificationsData(Math.ceil(Math.random() * 7));
+} catch (error) {
+    console.log(
+        `Something went wrong when getting notifactions data: ${error}`
+    );
+}
 
-export default notificationsData;
+export default data;
