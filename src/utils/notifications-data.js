@@ -18,24 +18,19 @@ import {
 /**
  * Get the notifications data
  * @param {Number} count - The random number of notifications to present to the user
- * @returns {Object} - An array of notification
+ * @returns {Object} - An array of notifications
  */
 async function notificationsData(count) {
-    let users;
     // fetch users based on count
-    users = await getUsers(count);
-
+    const users = await getUsers(count);
     // the array of notifications times based on number of notifications
     const notificationTimes = times(users.length);
-
     // will receive an array of Promises that each need to be resolved
     const notificationPromises = users.map(async (user, index) => {
         // events begins with 1 not 0 so must use ceil
         const type = Math.ceil(Math.random() * Object.keys(events).length);
         // notification can take a single event
         const event = events[type];
-        // whether the notification is initially read or not
-        const truth = [true, false];
         // notification will always start with these defined properties
         const notification = {
             id: nanoid(),
@@ -47,10 +42,9 @@ async function notificationsData(count) {
             group: "",
             message: "",
             picture: "",
-            unread: truth[Math.floor(Math.random() * truth.length)],
+            unread: true,
             time: notificationTimes[index],
         };
-
         // based on event, populate the property with fetched data
         switch (event) {
             case events[1]: // a post will always be an anime quote (hopefully a One Piece quote)
@@ -68,6 +62,7 @@ async function notificationsData(count) {
             case events[3]: // joined or left group, same logic applies
             case events[6]:
                 const group = await getGroup();
+                console.log(group);
                 const upperCasedGroup = group
                     .split(" ")
                     .map((word) => word[0].toUpperCase() + word.slice(1))
@@ -77,7 +72,6 @@ async function notificationsData(count) {
             default: // this should never happen
                 console.log("A wierd event just ocurred");
         }
-
         return notification;
     });
 
@@ -85,7 +79,18 @@ async function notificationsData(count) {
     return Promise.all(notificationPromises);
 }
 
-// get the random number of notifications
-const data = await notificationsData(Math.ceil(Math.random() * 7));
+// get the stored notifications
+const existingNotifications = JSON.parse(
+    localStorage.getItem("persistently_unread_notifications")
+);
+// localStorage may return null especially on an initial run
+//  so return zero if empty, otherwise assign with the length
+const existingCount = existingNotifications ? existingNotifications.length : 0;
+// if the count is less than 15, get more notifications,
+//  otherwise assign an empty array
+const data =
+    existingCount < 15
+        ? await notificationsData(Math.ceil(Math.random() * 7))
+        : [];
 
 export default data;
