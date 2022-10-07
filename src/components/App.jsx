@@ -36,11 +36,13 @@ export default function App() {
         );
     }, [notifications]); // watch changes done in notifications
 
-    // useEffect(() => {
-    //     setInterval(() => {
-    //         setCounter((prevCounter) => prevCounter + 1)
-    //     }, 1000)
-    // }, [])
+    // localStorage.clear()
+
+    useEffect(() => {
+        setInterval(() => {
+            setCounter((prevCounter) => prevCounter + 1)
+        }, 1000)
+    }, [])
 
     // handles making ALL notifications to be either read or unread
     function toggleAllNotificationReads() {
