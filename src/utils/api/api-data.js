@@ -28,6 +28,8 @@ async function getMessage() {
         console.log(`Something went wrong when getting post: ${error}`);
         message = backupMessage;
     }
+    // for whatever reason (not caught), the outcome can be null so assign backup
+    if (!message) message = backupMessage;
     return message;
 }
 
@@ -40,13 +42,16 @@ async function getMessage() {
 async function getPost() {
     let response;
     let post;
+    const singleBackupPost =
+        backupPost[Math.floor(Math.random() * backupPost.length)];
     try {
         response = await fetch(`https://animechan.vercel.app/api/random`);
         post = await response.json();
     } catch (error) {
         console.log(`Something went wrong when getting messages: ${error}`);
-        post = backupPost;
+        post = singleBackupPost;
     }
+    if (!post) post = singleBackupPost;
     return post;
 }
 
@@ -69,6 +74,7 @@ async function getGroup() {
         console.log(`Something went wrong when getting group: ${error}`);
         group = backupGroup;
     }
+    if (!group) group = backupGroup;
     return group;
 }
 
@@ -90,6 +96,7 @@ async function getPhoto() {
         // return backup photo
         photo = backupPhoto;
     }
+    if (!photo) photo = backupPhoto;
     return photo;
 }
 
@@ -99,8 +106,9 @@ async function getPhoto() {
  * @param {Number} count - based on the number of notifications to show (default = 1)
  * @returns {Object} users - returns an array of user data
  */
-async function getUsers(count = 1) {
+async function getUsers(count) {
     let users;
+    const countBackupUsers = backupUsers.splice(0, count);
     // fetch here
     try {
         const response = await fetch(
@@ -114,9 +122,10 @@ async function getUsers(count = 1) {
         }
     } catch (error) {
         console.log(`Something went wrong when getting users: ${error}`);
-        // return backup data of users
-        users = backupUsers;
+        // return backup data of specified amount of users
+        users = countBackupUsers;
     }
+    if (!users) users = countBackupUsers;
     return users;
 }
 
