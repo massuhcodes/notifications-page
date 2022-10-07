@@ -7,10 +7,6 @@
     cursor: pointer;
 }
 
-.notification-read {
-    background-color: var(--notification-read-background-color);
-}
-
 .notification-unread {
     background-color: var(--notification-unread-background-color);
 }
@@ -30,8 +26,12 @@
 }
 
 .section-notification .profile-picture {
-    width: 2.813em;
-    height: 2.813em;
+    /* width: 2.813em;
+    height: 2.813em; */
+    width: 20%;
+    height: 20%;
+    max-width: 2.813em;
+    max-height: 2.813em;
     object-fit: cover;
     border-radius: 50%;
     border: 0.125em solid var(--profile-picture-border-color);
@@ -40,6 +40,7 @@
 .section-notification .name {
     font-weight: 700;
     color: var(--notification-name-color);
+    /* display: block; */
 }
 
 .section-notification .event {
@@ -96,10 +97,7 @@
     height: 3.125em;
     border-radius: 0.438em;
     object-fit: cover;
-    margin-left: 1.25em;
-}
-
-.section-notification .picture {
+    /* margin-left: 1.25em; */
     padding: 0.125em;
     border: 0.0625em solid var(--notification-unread-background-color);
 }

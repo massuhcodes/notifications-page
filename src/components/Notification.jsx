@@ -43,7 +43,7 @@ export default function Notification(props) {
         <section
             // update background color based on truth
             className={`section-notification ${
-                unread ? "notification-unread" : "notification-read"
+                unread ? "notification-unread" : ""
             }`}
             // give back selected id
             onClick={() => props.toggleSingleNotificationRead(props.id)}
@@ -55,18 +55,17 @@ export default function Notification(props) {
                     alt={`Profile Picture of ${name}`}
                 />
                 <div className="inner-div">
-                    <p>
-                        <span className="name">{name}</span>
-                        <span className="event">{event}</span>
-                        {type === "1" ? (
-                            <span className="post">{post}</span>
-                        ) : type === "3" || type === "6" ? (
-                            <span className="group">{group}</span>
-                        ) : (
-                            ""
-                        )}
-                        {unread && <span className="dot">•</span>}
-                    </p>
+                    <span className="name">{name}</span>
+                    <span className="event">{event}</span>
+                    {type === "1" ? (
+                        <span className="post">{post}</span>
+                    ) : type === "3" || type === "6" ? (
+                        <span className="group">{group}</span>
+                    ) : (
+                        ""
+                    )}
+                    {unread && <span className="dot">•</span>}
+                    <p></p>
                     <time>{`${timeFormat}`}</time>
                     {message && (
                         <p

@@ -23,7 +23,7 @@ export default function App() {
     const [count, setCount] = useState(
         notifications.filter((note) => note.unread).length
     );
-    const setCounter = useState(0)[1]
+    const setCounter = useState(0)[1];
 
     useEffect(() => {
         // get the notifications that are still unread
@@ -35,7 +35,6 @@ export default function App() {
             JSON.stringify(unreadNotifications)
         );
     }, [notifications]); // watch changes done in notifications
-
 
     // useEffect(() => {
     //     setInterval(() => {
@@ -91,7 +90,7 @@ export default function App() {
                     onClick={toggleAllNotificationReads}
                     className="toggler-of-all-notifications"
                 >
-                    {count > 0 ? "Make all as read" : "Make all as unread"}
+                    {count > 0 ? "Read all" : "Unread all"}
                 </span>
             </header>
             <main>{notificationComponents}</main>

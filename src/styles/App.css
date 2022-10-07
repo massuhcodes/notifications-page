@@ -29,6 +29,7 @@ header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    flex-wrap: wrap;
     background-color: var(--app-background-color);
     padding: 1.063em 1.25em;
     box-shadow: 0.0625em 0.0625em 0.625em var(--header-box-shadow-color);
