@@ -2,19 +2,17 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 17px;
-    border-radius: 10px;
+    padding: 1.063em;
+    border-radius: 0.625em;
     cursor: pointer;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
 }
 
 .notification-read {
-    background-color: #fff;
+    background-color: var(--notification-read-background-color);
 }
 
 .notification-unread {
-    background-color: #f7fafd;
+    background-color: var(--notification-unread-background-color);
 }
 
 .section-notification .outer-div {
@@ -23,7 +21,7 @@
 }
 
 .section-notification .inner-div {
-    margin-left: 17px;
+    margin-left: 1.063em;
 }
 
 .section-notification p {
@@ -32,64 +30,80 @@
 }
 
 .section-notification .profile-picture {
-    width: 45px;
-    height: 45px;
+    width: 2.813em;
+    height: 2.813em;
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid #ffffff;
+    border: 0.125em solid var(--profile-picture-border-color);
 }
 
 .section-notification .name {
     font-weight: 700;
+    color: var(--notification-name-color);
 }
 
 .section-notification .event {
-    color: #5e6778;
-    margin-left: 5px;
+    color: var(--notification-event-color);
+    margin-left: 0.313em;
 }
 
 .section-notification .post {
     font-weight: 600;
-    color: #5e6778;
+    margin-left: 0.313em;
+    color: var(--notification-post-color);
 }
 
 .section-notification .group {
     font-weight: 600;
-    color: #0a317b;
+    margin-left: 0.313em;
+    color: var(--notification-group-color);
+}
+
+.section-notification .group:hover {
+    font-weight: 700;
 }
 
 .section-notification .dot {
-    margin-left: 10px;
-    font-size: 20px;
+    margin-left: 0.625em;
+    font-size: 1.25rem;
     line-height: 0.1;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
+    color: var(--dot-unread-color);
 }
 
-.dot-read {
-    color: #fff;
-}
-
-.dot-unread {
-    color: #f65351;
+.dot::selection {
+    user-select: none;
 }
 
 .section-notification time {
-    color: #939dae;
+    color: var(--notification-time-color);
 }
 
 .section-notification .message {
-    margin-top: 17px;
-    border: 1px solid #dde7ee;
-    border-radius: 6px;
-    padding: 17px;
-    color: #5e6778;
+    margin-top: 1.063em;
+    border: 0.0625em solid var(--notification-message-border-color);
+    border-radius: 0.375em;
+    padding: 1.063em;
+    color: var(--notification-message-unread-color);
 }
 
-.section-notification .notification-picture {
-    width: 45px;
-    height: 45px;
-    border-radius: 7px;
+.section-notification .message-read {
+    background-color: var(--message-read-background-color);
+    color: var(--notification-message-read-color);
+}
+
+.section-notification .picture {
+    width: 3.125em;
+    height: 3.125em;
+    border-radius: 0.438em;
     object-fit: cover;
-    margin-left: 20px;
+    margin-left: 1.25em;
+}
+
+.section-notification .picture {
+    padding: 0.125em;
+    border: 0.0625em solid var(--notification-unread-background-color);
+}
+
+.section-notification .picture-read {
+    border-color: var(--picture-read-border-color);
 }

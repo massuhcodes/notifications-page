@@ -4,8 +4,6 @@
 import { nanoid } from "nanoid";
 // types of notifications
 import { events } from "/src/utils/events.js";
-// notification times
-import { times } from "/src/utils/times.js";
 // data retrieved from apis
 import {
     getUsers,
@@ -23,8 +21,6 @@ import {
 async function notificationsData(count) {
     // fetch users based on count
     const users = await getUsers(count);
-    // the array of notifications times based on number of notifications
-    const notificationTimes = times(users.length);
     // will receive an array of Promises that each need to be resolved
     const notificationPromises = users.map(async (user, index) => {
         // events begins with 1 not 0 so must use ceil
@@ -43,7 +39,7 @@ async function notificationsData(count) {
             message: "",
             picture: "",
             unread: true,
-            time: notificationTimes[index],
+            time: new Date(),
         };
         // based on event, populate the property with fetched data
         switch (event) {
@@ -89,8 +85,7 @@ const existingCount = existingNotifications ? existingNotifications.length : 0;
 // if the count is less than 15, get more notifications,
 //  otherwise assign an empty array
 const data =
-    existingCount < 15
-        ? await notificationsData(Math.ceil(Math.random() * 7))
+    existingCount <= 15
+        ? await notificationsData(Math.ceil(Math.random() * 4))
         : [];
-
 export default data;

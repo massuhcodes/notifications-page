@@ -13,6 +13,31 @@ export default function Notification(props) {
         unread,
         time,
     } = props.user;
+    const timeUnits = {};
+    const past = new Date(time);
+    const current = new Date();
+    const elapsed = (current - past) / 1000;
+    timeUnits.seconds = Math.floor(elapsed % 60);
+    timeUnits.mins = Math.floor((elapsed / 60) % 60);
+    timeUnits.hours = Math.floor((elapsed / 3600) % 24);
+    timeUnits.days = Math.floor((elapsed / 86400) % 7);
+    timeUnits.weeks = Math.floor((elapsed / 604800) % 4);
+    timeUnits.months = Math.floor((elapsed / 2592000) % 12);
+
+    let timeFormat;
+    if (timeUnits.months) {
+        timeForamt = `${timeUnits.months}M ago`;
+    } else if (timeUnits.weeks) {
+        timeFormat = `${timeUnits.weeks}w ago`;
+    } else if (timeUnits.days) {
+        timeFormat = `${timeUnits.days}d ago`;
+    } else if (timeUnits.hours) {
+        timeFormat = `${timeUnits.hours}h ago`;
+    } else if (timeUnits.mins) {
+        timeFormat = `${timeUnits.mins}m ago`;
+    } else {
+        timeFormat = "now";
+    }
 
     return (
         <section
@@ -31,26 +56,23 @@ export default function Notification(props) {
                 />
                 <div className="inner-div">
                     <p>
-                        <span className="name">{name}</span>{" "}
-                        <span className="event">{event}</span>{" "}
+                        <span className="name">{name}</span>
+                        <span className="event">{event}</span>
                         {type === "1" ? (
                             <span className="post">{post}</span>
-                        ) : (
+                        ) : type === "3" || type === "6" ? (
                             <span className="group">{group}</span>
+                        ) : (
+                            ""
                         )}
+                        {unread && <span className="dot">•</span>}
                     </p>
-                    <time>{`${time} ${time === 1 ? "min" : "mins"} ago`}</time>
-                    <span
-                        // update based on truth
-                        className={`dot ${unread ? "dot-unread" : "dot-read"}`}
-                    >
-                        •
-                    </span>
+                    <time>{`${timeFormat}`}</time>
                     {message && (
                         <p
                             // update based on truth
                             className={`message ${
-                                unread ? "message-unread" : "message-read"
+                                !unread ? "message-read" : ""
                             }`}
                         >
                             {message}
@@ -60,7 +82,7 @@ export default function Notification(props) {
             </div>
             {picture && (
                 <img
-                    className="notification-picture"
+                    className={`picture ${!unread ? "picture-read" : ""}`}
                     src={picture}
                     alt={`${name}'s commented picture`}
                 />

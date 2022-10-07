@@ -1,34 +1,23 @@
+@import "/src/styles/ThemeModes.css";
+
 * {
     box-sizing: border-box;
-    /* Works on Firefox */
-    scrollbar-width: thin;
-    scrollbar-color: #0a317b2e;
-}
-
-/* Works on Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-    width: 7px;
-    cursor: pointer;
-}
-
-/* */
-*::-webkit-scrollbar-track {
-    background: #fff;
-    border-radius: 0 0 10px 0px;
-    box-shadow: inset -1px 1px 3px 1px #e4e4e480;
-    margin-top: 70px;
-    margin-right: 5px;
-    border-top: 1px solid #d7d7d784;
-}
-
-*::-webkit-scrollbar-thumb {
-    background-color: #d9e1e8;
-    border-radius: 0 0 10px 10px;
 }
 
 body {
     font-family: "Plus Jakarta Sans", sans-serif;
     padding: 0;
     margin: 0;
-    background-color: #fff;
+    overflow-x: hidden;
+    background-color: var(--app-background-color);
+}
+
+@media (min-width: 43.813em) {
+    body {
+        background-color: var(--body-background-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 }

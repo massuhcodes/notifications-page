@@ -17,23 +17,26 @@
     /*
         - app's border
         - header's bottom border
-        - toggler's border
         - scrollbar's top border
     */
-    --common-color-3: #d7d7d784;
+    --common-color-3: #dfdfdf;
     /*
         - app's box shadow
+        - header's box shadow
         - toggler's box shadow
     */
-    --common-color-4: #a5a5a514;
+    --common-color-4: #dcdbdb;
     /*
         - header's title's background
         - notification's message border
+        - scrollbar's thumb background
+        - picture border (read)
     */
-    --common-color-5: #dde7ee;
+    --common-color-5: #ccdbe6;
     /*
         - header's count's background
         - group text's color
+        - `make all as ...` color (hover)
     */
     --common-color-6: #0a317b;
     /* body */
@@ -44,30 +47,33 @@
     --app-box-shadow-color: var(--common-color-4);
     /* header */
     --header-border-bottom-color: var(--common-color-3);
-    --header-box-shadow-color: #d3d3d380;
-    --header-title-color: auto;
+    --header-box-shadow-color: var(--common-color-4);
     --header-title-background-color: var(--common-color-5);
     --header-count-color: var(--common-color-2);
     --header-count-background-color: var(--common-color-6);
     --header-toggler-of-all-notifications-color: var(--common-color-1);
+    --header-toggler-of-all-notifications-color-hover: var(--common-color-6);
     /* notification */
     --notification-read-background-color: var(--common-color-2);
-    --notification-unread-background-color: #f6fbff;
+    --notification-unread-background-color: #eef4f9;
+    --message-read-background-color: var(--common-color-5);
+    --picture-read-border-color: var(--common-color-5);
     --profile-picture-border-color: var(--common-color-2);
-    --group-text-color: var(--common-color-6);
-    --dot-unread-color: #f65351;
-    --notification-time-color: #939dae;
+    --notification-group-color: var(--common-color-6);
+    --notification-message-unread-color: var(--common-color-1);
+    --notification-message-read-color: #071637;
     --notification-message-border-color: var(--common-color-5);
-    --notification-message-color: var(--common-color-1);
+    --notification-time-color: #939dae;
+    --dot-unread-color: #f65351;
     /* toggler */
-    --toggler-border-color: var(--common-color-3);
     --toggler-box-shadow-color: var(--common-color-4);
     --toggler-background-color: var(--common-color-2);
+    --toggler-image: url("/src/assets/sunny.png");
     /* scrollbar */
     --scrollbar-track-background-color: var(--common-color-2);
     --scrollbar-box-shadow-color: #e4e4e480;
     --scrollbar-border-top-color: var(--common-color-3);
-    --scrollbar-thumb-background-color: #d9e1e8;
+    --scrollbar-thumb-background-color: var(--common-color-5);
 }
 
 .dark {
@@ -96,6 +102,8 @@
     /*
         - header's title background
         - scrollbar's thumb background
+        - notification's message border
+        - picture border (read)
     */
     --common-color-4: #283343;
     /*
@@ -133,21 +141,26 @@
     --header-count-color: #0c0c0c;
     --header-count-background-color: var(--common-color-5);
     --header-toggler-of-all-notifications-color: var(--common-color-8);
+    --header-toggler-of-all-notifications-color-hover: var(--common-color-5);
     /* notification */
-    --notification-read-background-color: var(--common-color-1);
-    --notification-unread-background-color: #252d39;
-    --profile-picture-border-color: var(--common-color-1);
     --notification-name-color: var(--common-color-6);
     --notification-event-color: var(--common-color-8);
     --notification-post-color: var(--common-color-7);
+    --notification-read-background-color: var(--common-color-1);
+    --message-read-background-color: var(--common-color-4);
+    --picture-read-border-color: var(--common-color-4);
+    --notification-unread-background-color: #252d39;
+    --profile-picture-border-color: var(--common-color-1);
     --notification-group-color: var(--common-color-5);
-    --notification-message-color: var(--common-color-7);
-    --notification-message-border-color: var(--common-color-1);
+    --notification-message-unread-color: var(--common-color-7);
+    --notification-message-read-color: #b8c7e3;
+    --notification-message-border-color: var(--common-color-4);
     --notification-time-color: var(--common-color-8);
     --dot-unread-color: #00ffee;
     /* toggler */
     --toggler-background-color: #202532;
     --toggler-box-shadow-color: var(--common-color-3);
+    --toggler-image: url("/src/assets/night.png");
     /* scrollbar */
     --scrollbar-track-background-color: var(--common-color-1);
     --scrollbar-box-shadow-color: var(--common-color-3);

@@ -10,7 +10,7 @@ export default function ThemeToggler() {
     const [theme, setTheme] = useState(persistedTheme ?? "light");
 
     useEffect(() => {
-        document.body.className = theme === "light" ? "light" : "dark"
+        document.body.className = theme === "light" ? "light" : "dark";
         localStorage.setItem(THEME_KEY, theme);
     }, [theme]);
 
@@ -20,7 +20,7 @@ export default function ThemeToggler() {
 
     return (
         <div className={"toggler"} onClick={toggleTheme}>
-            <img id="toggler-image" src={theme === "light" ? night : sunny} />
+            <img id="toggler-image" src={theme === "light" ? sunny : night} />
         </div>
     );
 }
