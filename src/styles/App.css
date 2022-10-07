@@ -1,6 +1,6 @@
 .app {
     max-width: 43.75em;
-    min-width: 29.375em;
+    /* min-width: 29.375em; */
     background-color: var(--app-background-color);
 }
 
